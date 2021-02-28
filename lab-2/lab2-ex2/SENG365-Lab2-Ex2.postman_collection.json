@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "c314f5ec-c3a1-4233-86b2-b7dc7247e610",
+		"name": "SENG365-Lab2-Ex2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get_users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 200\r",
+							"})\r",
+							"pm.test(\"Body test\", function () {\r",
+							"    pm.response.to.be.withBody; // tests data is returned in body\r",
+							"    pm.response.to.be.json // tests datatype is json\r",
+							"})\r",
+							"const jsonData = pm.response.json()\r",
+							"pm.test(\"Array test\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"array\")\r",
+							"    pm.expect(jsonData).not.to.be.empty\r",
+							"})\r",
+							"\r",
+							"pm.collectionVariables.set(\"test_id\", jsonData[jsonData.length-1].user_id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				},
+				"description": "Request getting all users"
+			},
+			"response": []
+		},
+		{
+			"name": "get_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 200\r",
+							"})\r",
+							"pm.test(\"Body test\", function () {\r",
+							"    pm.response.to.be.withBody; // tests data is returned in body\r",
+							"    pm.response.to.be.json // tests datatype is json\r",
+							"})\r",
+							"const jsonData = pm.response.json()\r",
+							"pm.test(\"Object test\", function () {\r",
+							"    pm.expect(jsonData).to.be.an('object')\r",
+							"    pm.expect(jsonData).not.to.be.empty\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/{{user_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{{user_id}}"
+					]
+				},
+				"description": "Request to get a user"
+			},
+			"response": []
+		},
+		{
+			"name": "post_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				},
+				"description": "Request to post a user"
+			},
+			"response": []
+		},
+		{
+			"name": "put_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"updated\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/users/{{test_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{{test_id}}"
+					]
+				},
+				"description": "Request to update a user"
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 201\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/{{test_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{{test_id}}"
+					]
+				},
+				"description": "Request to delete user"
+			},
+			"response": []
+		},
+		{
+			"name": "get_conversations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 200\r",
+							"})\r",
+							"pm.test(\"Body test\", function () {\r",
+							"    pm.response.to.be.withBody; // tests data is returned in body\r",
+							"    pm.response.to.be.json // tests datatype is json\r",
+							"})\r",
+							"const jsonData = pm.response.json()\r",
+							"pm.test(\"Array test\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"array\")\r",
+							"    pm.expect(jsonData).not.to.be.empty\r",
+							"})\r",
+							"\r",
+							"pm.collectionVariables.set(\"test_convo_id\", jsonData[jsonData.length-1].convo_id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/conversations",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations"
+					]
+				},
+				"description": "Request to get all conversations"
+			},
+			"response": []
+		},
+		{
+			"name": "get_conversation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 200\r",
+							"})\r",
+							"pm.test(\"Body test\", function () {\r",
+							"    pm.response.to.be.withBody; // tests data is returned in body\r",
+							"    pm.response.to.be.json // tests datatype is json\r",
+							"})\r",
+							"const jsonData = pm.response.json()\r",
+							"pm.test(\"Array test\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"object\")\r",
+							"    pm.expect(jsonData).not.to.be.empty\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/conversations/{{convo_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations",
+						"{{convo_id}}"
+					]
+				},
+				"description": "Request to get a conversation"
+			},
+			"response": []
+		},
+		{
+			"name": "post_conversations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"convo_name\": \"postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/conversations",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations"
+					]
+				},
+				"description": "Request to post a conversation"
+			},
+			"response": []
+		},
+		{
+			"name": "put_conversation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"convo_name\": \"updated\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/conversations/{{test_convo_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations",
+						"{{test_convo_id}}"
+					]
+				},
+				"description": "Request to update a conversation"
+			},
+			"response": []
+		},
+		{
+			"name": "delete_conversation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 201\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/conversations/{{test_convo_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations",
+						"{{test_convo_id}}"
+					]
+				},
+				"description": "Request to delete a conversation"
+			},
+			"response": []
+		},
+		{
+			"name": "get_messages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 200\r",
+							"})\r",
+							"pm.test(\"Body test\", function () {\r",
+							"    pm.response.to.be.withBody; // tests data is returned in body\r",
+							"    pm.response.to.be.json // tests datatype is json\r",
+							"})\r",
+							"const jsonData = pm.response.json()\r",
+							"pm.test(\"Array test\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"array\")\r",
+							"    pm.expect(jsonData).not.to.be.empty\r",
+							"})\r",
+							"\r",
+							"pm.collectionVariables.set(\"test_message_id\", jsonData[jsonData.length-1].message_id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/conversations/{{convo_id}}/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations",
+						"{{convo_id}}",
+						"messages"
+					]
+				},
+				"description": "Request to get all conversations"
+			},
+			"response": []
+		},
+		{
+			"name": "get_message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200); // tests status is 200\r",
+							"})\r",
+							"pm.test(\"Body test\", function () {\r",
+							"    pm.response.to.be.withBody; // tests data is returned in body\r",
+							"    pm.response.to.be.json // tests datatype is json\r",
+							"})\r",
+							"const jsonData = pm.response.json()\r",
+							"pm.test(\"Array test\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"object\")\r",
+							"    pm.expect(jsonData).not.to.be.empty\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/conversations/{{convo_id}}/messages/{{message_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations",
+						"{{convo_id}}",
+						"messages",
+						"{{message_id}}"
+					]
+				},
+				"description": "Request to get a conversation"
+			},
+			"response": []
+		},
+		{
+			"name": "post_message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": {{user_id}},\r\n    \"message\": \"A test message from postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/conversations/{{convo_id}}/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"conversations",
+						"{{convo_id}}",
+						"messages"
+					]
+				},
+				"description": "Request to post a message"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"setTimeout(function(){}, [100])"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_id",
+			"value": "1"
+		},
+		{
+			"key": "convo_id",
+			"value": "1"
+		},
+		{
+			"key": "message_id",
+			"value": "1"
+		},
+		{
+			"key": "message",
+			"value": "A test message from postman"
+		},
+		{
+			"key": "test_id",
+			"value": ""
+		},
+		{
+			"key": "test_convo_id",
+			"value": ""
+		},
+		{
+			"key": "test_message_id",
+			"value": ""
+		}
+	]
+}
