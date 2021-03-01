@@ -11,6 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "df19db24-11cd-41f0-8f06-5b4699f33894",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 200\r",
@@ -56,6 +57,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "6409038b-17a6-49a7-b04e-7b37bf5f8ba7",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 200\r",
@@ -100,6 +102,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "b2d77da9-2d5f-4ea1-bfdb-5a7f88c2fd35",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(201); // tests status is 201\r",
@@ -145,9 +148,10 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "64586ce6-523f-494d-b8a1-5ac092fce0ee",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
-							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"    pm.response.to.have.status(200); // tests status is 201\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -188,6 +192,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "d772c139-01ab-4d7e-ae45-ff063c1ea458",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 201\r",
@@ -222,6 +227,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "4c6f1d03-fc96-400f-a541-0923801ff9c5",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 200\r",
@@ -267,6 +273,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "343e41c6-5ec5-46a5-bbaa-c3cda0adab29",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 200\r",
@@ -311,6 +318,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "65398d59-c06f-4f36-a319-2927b1c280e5",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(201); // tests status is 201\r",
@@ -354,9 +362,10 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "abd30613-ddfd-48fe-be53-2b2c02be7af3",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
-							"    pm.response.to.have.status(201); // tests status is 201\r",
+							"    pm.response.to.have.status(200); // tests status is 201\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -397,6 +406,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "35075552-50c9-44e0-a7e8-bfaeaa585e79",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 201\r",
@@ -431,6 +441,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "e326b763-041b-4d58-8bb4-0e513fbcccbc",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 200\r",
@@ -478,6 +489,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "a2a83194-eba3-4e61-be00-635069b8395e",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(200); // tests status is 200\r",
@@ -524,6 +536,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "557d5e77-c7c7-459b-b9c6-b4742d1b54d4",
 						"exec": [
 							"pm.test(\"Status test\", function () {\r",
 							"    pm.response.to.have.status(201); // tests status is 201\r",
@@ -568,6 +581,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
+				"id": "84ea1aeb-11c2-4829-a70e-60c484a45dd2",
 				"type": "text/javascript",
 				"exec": [
 					"setTimeout(function(){}, [100])"
@@ -577,6 +591,7 @@
 		{
 			"listen": "test",
 			"script": {
+				"id": "654d47ad-5af3-4ea4-bdb3-bba55ac510b8",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -586,32 +601,47 @@
 	],
 	"variable": [
 		{
+			"id": "42bb75b5-4728-4077-bd8b-ee4f811d1774",
 			"key": "user_id",
-			"value": "1"
+			"value": "1",
+			"type": "string"
 		},
 		{
+			"id": "8032ca75-30f3-4c62-b8dc-e7a3972c2ffc",
 			"key": "convo_id",
-			"value": "1"
+			"value": "1",
+			"type": "string"
 		},
 		{
+			"id": "dbfc9b52-cac1-469a-b3e9-5ba1eeddd1dd",
 			"key": "message_id",
-			"value": "1"
+			"value": "1",
+			"type": "string"
 		},
 		{
+			"id": "0b110c1e-8481-4947-adfa-ac71bae8b517",
 			"key": "message",
-			"value": "A test message from postman"
+			"value": "A test message from postman",
+			"type": "string"
 		},
 		{
+			"id": "3fdeb2cf-7561-47a3-b516-bad9acbba736",
 			"key": "test_id",
-			"value": ""
+			"value": 24,
+			"type": "number"
 		},
 		{
+			"id": "5780762c-6bee-47e1-b4c1-e35a0ba3f733",
 			"key": "test_convo_id",
-			"value": ""
+			"value": 9,
+			"type": "number"
 		},
 		{
+			"id": "812d8ef3-ed91-412e-8ab3-559178566c53",
 			"key": "test_message_id",
-			"value": ""
+			"value": "",
+			"type": "string"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
