@@ -17,11 +17,13 @@ exports.create = async function( req, res ) {
     try {
         const result = await user.insert( username );
         res.status( 201 )
-            .send( {user_id: result.insertId} );
+            .send({user_id: result.insertId});
+        //We return the user_id to the client to use in further requests
     } catch( err ) {
         res.status( 500 )
             .send( `ERROR creating user ${username}: ${ err }` );
     }
+
 };
 
 exports.read = async function(req, res){

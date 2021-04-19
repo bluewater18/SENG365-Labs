@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Application</title>
+</head>
+<body>
+<div id="app" v-if="users.length > 0">
+    Users:
+    <ol >
+        <li v-for="(user, index) in users" :key="index">
+            <p>
+                {{ user.username }}
+                <button v-on:click="deleteUser(user)">Delete</button>
+            </p>
+        </li>
+    </ol>
+    <hr/>
+    <h2>Add a new user</h2>
+    <form v-on:submit="addUser()">
+        <input v-model="username" placeholder="Username" />
+        <input type="submit" value="Add" />
+    </form>
+
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
