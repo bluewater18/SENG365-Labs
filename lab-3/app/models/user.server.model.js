@@ -26,10 +26,20 @@ exports.insert = async function( username ) {
     return result;
 };
 
-exports.alter = async function(){
-    return null;
+exports.alter = async function(id, username){
+    console.log(`Request to update user ${id} with username ${username}`);
+    const conn = await db.getPool().getConnection();
+    const query = 'update lab2_users set username = ? where user_id=?';
+    const [result] = await conn.query(query, [username, id]);
+    conn.release();
+    return result
 };
 
-exports.remove = async function(){
-    return null;
+exports.remove = async function(id){
+    console.log(`Request to delete user ${id}`);
+    const conn = await db.getPool().getConnection();
+    const query = 'delete from lab2_users where user_id=?';
+    const [result] = await conn.query(query, [id]);
+    conn.release();
+    return result
 };
