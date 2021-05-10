@@ -1,94 +1,83 @@
 <template>
   <div>
-    <div v-if="errorFlag" style="color: red;">
-      {{ error }}
+    <div v-if="errorFlag">
+      <el-alert
+          title="Whoops! Something went wrong."
+          type="error">
+        <span>Error: {{error}}</span>
+      </el-alert>
     </div>
     <div v-if="$route.params.userId">
       <div id="user">
-        <router-link :to="{ name: 'users' }">Back to Users</router-link>
-        <br /><br />
-
-        <table>
-          <tr>
-            <td>User ID</td>
-            <td>Username</td>
-          </tr>
-          <tr>
-            <td>{{ $route.params.userId }}</td>
-            <td>{{ getSingleUser($route.params.userId).username }}</td>
-          </tr>
-        </table>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteUserModal">
-          Delete
-        </button>
-      </div>
-      <!-- Modal -->
-      <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <el-card class="box-card">
+          <template #header>
+            <div class="user-card-header">
+              <span>{{ getSingleUser($route.params.userId).username }}</span>
             </div>
-            <div class="modal-body">
-              Are you sure that you want to delete this user?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                Close
-              </button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="deleteUser($route.params.userId)">
-                Delete User
-              </button>
-            </div>
+          </template>
+          <div class="card-body" style="padding-left:0px">
+            User ID : {{$route.params.userId}}
           </div>
-        </div>
+          <div class="user-card-bottom">
+            <router-link :to="{ name: 'users' }">Back to Users</router-link>
+            <el-popconfirm
+              confirmButtonText='OK'
+              confirm-button-type="danger"
+              cancelButtonText='No, Thanks'
+              icon="el-icon-info"
+              iconColor="red"
+              title="Are you sure to delete this user?"
+              @confirm="deleteUser($route.params.userId)"
+              >
+              <template #reference>
+                <el-button type="danger" plain>Delete</el-button>
+              </template>
+            </el-popconfirm>
+          </div>
+        </el-card>
       </div>
-
     </div>
 
     <div v-else>
     <div id="users">
-      <table>
-        <tr v-for="user in users" v-bind:key="user.user_id">
-          <td>{{ user.username }}</td>
-          <td><router-link :to="{name: 'user', params: {userId: user.user_id}}" >View</router-link></td>
-        </tr>
-      </table>
+      <el-table :data="users" style="width: 100%">
+        <el-table-column prop="user_id" label="User ID">
+        </el-table-column>
+        <el-table-column prop="username" label="Username">
+        </el-table-column>
+        <el-table-column label="Operations">
+          <template #default="scope">
+              <router-link :to="{name: 'user', params: {userId: users[scope.$index].user_id}}">View User</router-link>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
   </div>
   </div>
-
-
 </template>
 
 <script>
 import axios from "axios";
 import {ref, onMounted} from 'vue'
-import {useRouter} from 'vue-router'
+import {useRouter} from 'vue-router' //imports router function we need
 
 export default {
   name: 'Users',
-  components: {},
   setup() {
-    const router = useRouter()
-
+    const router = useRouter() //initialises our router object
     const error = ref("");
     const errorFlag = ref(false);
     const users = ref([]);
-
     const getUsers = () => {
       axios.get('http://localhost:3000/api/users')
           .then((response) => {
             users.value = response.data;
-          }, (error) => {
-            error.value = error;
+          }, (err) => {
+            error.value = err.message;
             errorFlag.value = true;
           });
     }
-
+    onMounted(getUsers)
     const getSingleUser = (id) => {
       for (let i = 0; i < users.value.length; i++) {
         if (users.value[i].user_id == id) {
@@ -96,7 +85,6 @@ export default {
         }
       }
     }
-
     const deleteUser = (user_id) => {
       axios.delete('http://localhost:3000/api/users/' + user_id)
           .then(() => {
@@ -105,20 +93,16 @@ export default {
                 users.value.splice(i, 1);
               }
             }
-            router.push('/users');
-          }, (error) => {
-            error.value = error;
+            router.push('/users'); //pushes the webpage back to /users
+          }, (err) => {
+            error.value = err.message;
             errorFlag.value = true;
           });
     }
-
-    onMounted(getUsers)
-
     return {
       error: error,
       errorFlag: errorFlag,
       users: users,
-      getUsers: getUsers,
       getSingleUser: getSingleUser,
       deleteUser: deleteUser,
     }
@@ -128,5 +112,18 @@ export default {
 </script>
 
 <style scoped>
-
+  .user-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: inherit!important;
+  }
+  .user-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .box-card {
+    width: 480px;
+  }
 </style>

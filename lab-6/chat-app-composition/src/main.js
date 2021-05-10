@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
-
-
 import {createWebHistory, createRouter} from 'vue-router'
+import ElementPlus from 'element-plus'
 
 import App from './App.vue'
 import Home from './Home.vue'
@@ -30,6 +29,7 @@ const router = createRouter({
 })
 
 const app = createApp(App)
+app.use(ElementPlus)
 app.use(router)
 
 
